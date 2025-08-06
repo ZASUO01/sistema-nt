@@ -1,0 +1,9 @@
+# Build
+/dist
+/node_modules
+
+# Env
+.env
+
+# Docker
+/data
