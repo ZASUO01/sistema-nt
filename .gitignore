@@ -4,6 +4,3 @@
 
 # Env
 .env
-
-# Docker
-/data

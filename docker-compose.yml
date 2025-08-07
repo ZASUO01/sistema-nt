@@ -1,15 +1,10 @@
-version: '3.8'
-
 services:
-  postgres:
-    container_name: sistema-nt-pg
+  pg-database:
     image: bitnami/postgresql
+    container_name: pg-database 
     ports:
       - 5432:5432
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: docker
-      POSTGRES_DB: sistema-nt
-      PGDATA: /data/postres
-    volumes:
-      - ./data/pg:/data/postgres
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=sistema_nt
