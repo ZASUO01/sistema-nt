@@ -7,14 +7,14 @@ import { FakeHashComparer } from 'test/cryptography/fake-hash-comparer'
 import { FakeHashGenerator } from 'test/cryptography/fake-hash-generator'
 import { makeUser } from 'test/factories/users/make-user'
 
-describe('Authenticate Unit', () => {
+describe('Authenticate User - Unit', () => {
   let usersRepository: InMemoryUsersRepository
   let hashComparer: FakeHashComparer
   let hashGenerator: FakeHashGenerator
   let tokenGenerator: FakeTokenGenerator
   let sut: AuthenticateUserUseCase
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     usersRepository = new InMemoryUsersRepository()
     hashComparer = new FakeHashComparer()
     tokenGenerator = new FakeTokenGenerator()
@@ -28,7 +28,7 @@ describe('Authenticate Unit', () => {
 
     const user = makeUser({
       email: 'johndoe@example.com',
-      password_hash: await hashGenerator.hash('123456'),
+      passwordHash: await hashGenerator.hash('123456'),
     })
     usersRepository.items.push(user)
   })
@@ -67,15 +67,10 @@ describe('Authenticate Unit', () => {
   })
 
   it('should not be able to authenticate with blocked user', async () => {
-    const blockedUser = makeUser({
-      email: 'blocked@example.com',
-      password_hash: await hashGenerator.hash('123456'),
-      status: 'BLOCKED',
-    })
-    usersRepository.items.push(blockedUser)
+    usersRepository.items[0].status = 'BLOCKED'
 
     const result = await sut.execute({
-      email: 'blocked@example.com',
+      email: 'johndoe@example.com',
       password: '123456',
     })
 

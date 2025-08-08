@@ -14,7 +14,7 @@ export function makeUser(
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
       email: faker.internet.email(),
-      password_hash: faker.internet.password(),
+      passwordHash: faker.internet.password(),
       level: 'DEFAULT',
       status: 'ACTIVE',
       createdAt: new Date(),

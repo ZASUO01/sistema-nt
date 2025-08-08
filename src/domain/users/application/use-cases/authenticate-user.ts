@@ -34,13 +34,13 @@ export class AuthenticateUserUseCase {
       return left(new InvalidCredentialsError())
     }
 
-    if (userFound.blocked()) {
+    if (!userFound.isActive()) {
       return left(new BlockeUserError())
     }
 
     const isValidPassword = await this.hashComparer.compare(
       password,
-      userFound.password_hash,
+      userFound.passwordHash,
     )
 
     if (!isValidPassword) {
@@ -50,6 +50,7 @@ export class AuthenticateUserUseCase {
     const accessToken = await this.tokenGenerator.generate(
       {
         sub: userFound.id.toString(),
+        role: userFound.level,
       },
       'ACCESS',
     )
