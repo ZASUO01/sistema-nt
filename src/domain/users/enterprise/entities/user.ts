@@ -67,6 +67,10 @@ export class User extends Entity<UserProps> {
     return this.props.level
   }
 
+  get status() {
+    return this.props.status
+  }
+
   get createdAt() {
     return this.props.createdAt
   }

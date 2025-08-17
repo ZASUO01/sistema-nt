@@ -70,6 +70,7 @@ export class PasswordResetHash extends Entity<PasswordResetHashProps> {
       'createdAt' | 'expiresAt' | 'isValid'
     >,
     hash: string,
+    id?: UniqueEntityId,
   ) {
     return new PasswordResetHash(
       {
@@ -81,6 +82,7 @@ export class PasswordResetHash extends Entity<PasswordResetHashProps> {
         ...props,
       },
       hash,
+      id,
     )
   }
 

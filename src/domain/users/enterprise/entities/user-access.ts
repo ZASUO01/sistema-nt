@@ -20,6 +20,14 @@ export class UserAccess extends Entity<UserAccessProps> {
     return this.props.userId
   }
 
+  get appCode() {
+    return this.props.appCode
+  }
+
+  get appLevel() {
+    return this.props.appLevel
+  }
+
   static create(props: UserAccessProps, id?: UniqueEntityId) {
     return new UserAccess(props, id)
   }

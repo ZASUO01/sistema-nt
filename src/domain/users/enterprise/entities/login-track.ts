@@ -22,6 +22,14 @@ export class LoginTrack extends Entity<LoginTrackProps> {
     return this.props.state
   }
 
+  get device() {
+    return this.props.device
+  }
+
+  get addr() {
+    return this.props.addr
+  }
+
   get ocurredAt() {
     return this.props.ocurredAt
   }
